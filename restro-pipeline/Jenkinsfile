@@ -1,6 +1,6 @@
 node {
     stage ('Prepare'){
-        git branch: 'main', poll: false, url: 'https://github.com/shubh8shekhar/jenkins-devops.git'
+        git branch: 'main', poll: false, url: 'https://github.com/shubh8shekhar/restro.git'
     }
     stage ('Build'){
         def mvnHome = tool 'MAVAN'
