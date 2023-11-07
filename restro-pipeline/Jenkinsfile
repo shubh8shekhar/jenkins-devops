@@ -1,1 +1,14 @@
-Hi
+node {
+    stage ('Prepare'){
+        git branch: 'main', poll: false, url: 'https://github.com/shubh8shekhar/jenkins-devops.git'
+    }
+    stage ('Build'){
+        def mvnHome = tool 'MAVAN'
+        withEnv(["MVN_HOME=$mvnHome"]){
+            sh '"MVN_HOME/bin/mvn" clean compile package'
+        }
+    }
+    stage ('Deploy'){
+        deploy adapters: [tomcat9(credentialsId: '39f30aeb-06c6-4e54-848d-f50ef8ca00be', path: '', url: 'http://65.2.189.234:8080/')], contextPath: null, onFailure: false, war: '**/*.war'
+    }
+}
